@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+  <title>Sign Up - TapNpay</title>
+</head>
+<body class="flex items-center justify-center h-screen bg-gray-100">
+
+  <div class="bg-white w-full max-w-md rounded-2xl shadow-xl p-8">
+    <h2 class="text-xl font-semibold text-gray-800 mb-2">Welcome to <span class="text-blue-600">TapNpay</span></h2>
+    <h1 class="text-2xl font-bold mb-6">Get started with your email or phone number</h1>
+
+    <form>
+      <input type="text" placeholder="Enter your email or phone number" class="w-full border rounded-lg px-4 py-3 mb-4 focus:ring-2 focus:ring-blue-500 outline-none" required>
+      <label class="text-sm font-medium text-gray-600 mb-1 block">Where is your company registered?</label>
+      <select class="w-full border rounded-lg px-4 py-3 mb-6 focus:ring-2 focus:ring-blue-500 outline-none">
+        <option>India</option><option>USA</option><option>UK</option><option>Other</option>
+      </select>
+      <button type="submit" class="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition">Continue</button>
+    </form>
+
+    <div class="flex items-center my-6"><hr class="flex-1 border-gray-300"><span class="px-3 text-sm text-gray-500">or</span><hr class="flex-1 border-gray-300"></div>
+
+    <!-- Google Sign In -->
+    <div id="g_id_onload"
+         data-client_id="YOUR_GOOGLE_CLIENT_ID"
+         data-context="signup"
+         data-ux_mode="popup"
+         data-callback="handleCredentialResponse">
+    </div>
+    <div class="g_id_signin" data-type="standard" data-theme="outline" data-text="continue_with" data-size="large" data-logo_alignment="left"></div>
+
+    <p class="text-xs text-gray-500 text-center mt-6">By continuing you agree to our <a href="#" class="text-blue-600">privacy policy</a> and <a href="#" class="text-blue-600">terms of use</a>.</p>
+  </div>
+
+  <script>
+    function handleCredentialResponse(response) {
+      const data = JSON.parse(atob(response.credential.split('.')[1]));
+      alert("Welcome " + data.email);
+      console.log("Google User:", data);
+    }
+  </script>
+</body>
+</html>
