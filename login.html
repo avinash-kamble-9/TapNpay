@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+  <title>Log In - TapNpay</title>
+</head>
+<body class="flex items-center justify-center h-screen bg-gray-100">
+
+  <div class="bg-white w-full max-w-md rounded-2xl shadow-xl p-8">
+    <h2 class="text-xl font-semibold text-gray-800 mb-2">Welcome back to <span class="text-blue-600">TapNpay</span></h2>
+    <h1 class="text-2xl font-bold mb-6">Log in to your account</h1>
+
+    <form>
+      <input type="email" placeholder="Enter your email" class="w-full border rounded-lg px-4 py-3 mb-4 focus:ring-2 focus:ring-blue-500 outline-none" required>
+      <input type="password" placeholder="Enter your password" class="w-full border rounded-lg px-4 py-3 mb-6 focus:ring-2 focus:ring-blue-500 outline-none" required>
+      <button type="submit" class="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition">Continue</button>
+    </form>
+
+    <div class="flex items-center my-6"><hr class="flex-1 border-gray-300"><span class="px-3 text-sm text-gray-500">or</span><hr class="flex-1 border-gray-300"></div>
+
+    <!-- Google Login -->
+    <div id="g_id_onload"
+         data-client_id="YOUR_GOOGLE_CLIENT_ID"
+         data-context="signin"
+         data-ux_mode="popup"
+         data-callback="handleCredentialResponse">
+    </div>
+    <div class="g_id_signin" data-type="standard" data-theme="outline" data-text="continue_with" data-size="large" data-logo_alignment="left"></div>
+  </div>
+
+  <script>
+    function handleCredentialResponse(response) {
+      const data = JSON.parse(atob(response.credential.split('.')[1]));
+      alert("Welcome back " + data.email);
+      console.log("Google User:", data);
+    }
+  </script>
+</body>
+</html>
