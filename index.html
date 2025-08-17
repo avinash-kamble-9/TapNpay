@@ -1,275 +1,221 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="icon" href="assets/mainlogo.png">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
-    integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Mulish:wght@400;600&display=swap">
-
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
   <title>TapNpay - Professional Payment Portal</title>
-
-  <style>
-    @keyframes textChange {
-      0%,
-      10% {
-        transform: translateY(0);
-      }
-
-      20%,
-      30% {
-        transform: translateY(-100%);
-      }
-
-      40%,
-      50% {
-        transform: translateY(-200%);
-      }
-
-      60%,
-      70% {
-        transform: translateY(-300%);
-      }
-
-      80%,
-      90% {
-        transform: translateY(-400%);
-      }
-
-      100% {
-        transform: translateY(0);
-      }
-    }
-
-    .animate-text-change {
-      animation: textChange 10s infinite;
-    }
-
-    footer ul li {
-      cursor: pointer;
-    }
-
-    footer ul li:hover {
-      text-decoration: underline;
-    }
-
-    /* Modal smooth transition */
-    #modal {
-      transition: all 0.3s ease-in-out;
-    }
-  </style>
+  <meta name="description" content="TapNpay - Professional Payment Portal. Experience effortless NFC and contactless payments across shops, malls, and transport.">
+  <meta name="keywords" content="payments, NFC, contactless, wallet, banking, e-wallet, TapNpay">
+  <meta name="author" content="TapNpay Team">
 </head>
-
 <body class="font-sans bg-gray-50">
 
   <!-- Navbar -->
-  <nav class="w-full px-10 py-6 flex gap-6 items-center shadow-md bg-white sticky top-0 z-50">
-    <a href="/" class="cursor-pointer px-4">
-      <img src="assets/polotno.png" class="w-[100px] h-[80px]" />
+  <nav class="w-full px-6 py-4 flex items-center shadow-md bg-white sticky top-0 z-50">
+    <a href="index.html" class="cursor-pointer px-2">
+      <img src="assets/mainlogo.png" class="w-28 h-auto" alt="TapNpay Logo" />
     </a>
 
-    <!-- Menu -->
+    <!-- Desktop Menu -->
     <ul class="hidden lg:flex gap-6 ml-10">
-      <li class="relative py-2 text-gray-600 hover:text-blue-600 cursor-pointer transition">
-        Payments
-      </li>
-      <li class="relative py-2 text-gray-600 hover:text-blue-600 cursor-pointer transition">
-        Banking+
-      </li>
-      <li class="relative py-2 text-gray-600 hover:text-blue-600 cursor-pointer transition">
-        E-wallet
-      </li>
-      <li class="relative py-2 text-gray-600 hover:text-blue-600 cursor-pointer transition">
-        Support
-      </li>
+      <li><a href="#" class="py-2 text-gray-600 hover:text-blue-600">Payments</a></li>
+      <li><a href="#" class="py-2 text-gray-600 hover:text-blue-600">Banking+</a></li>
+      <li><a href="#!" id="ewalletLink" class="py-2 text-gray-600 hover:text-blue-600">E-wallet</a></li>
+      <li><a href="#" class="py-2 text-gray-600 hover:text-blue-600">Support</a></li>
     </ul>
 
+    <!-- Right buttons -->
     <div class="flex ml-auto gap-4 items-center">
-     
-      <button class="signup-btn open-modal-btn text-sm font-semibold text-gray-700 px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded">
+      <a href="login.html" class="text-sm font-semibold text-gray-700 px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded">
         Log In
-      </button>
-      <button class="signup-btn open-modal-btn text-sm font-semibold text-white bg-blue-600 px-6 py-2 rounded hidden lg:block">
+      </a>
+      <a href="signup.html" class="text-sm font-semibold text-white bg-blue-600 px-6 py-2 rounded hidden lg:block">
         Sign Up <i class="fa-solid fa-arrow-right text-xs pl-1"></i>
+      </a>
+      <!-- Mobile Hamburger -->
+      <button id="mobileMenuBtn" class="lg:hidden text-gray-600 text-2xl">
+        <i class="fa-solid fa-bars"></i>
       </button>
-      <i class="fa-solid fa-bars inline-block lg:hidden text-xl text-gray-600"></i>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobileMenu" class="hidden absolute top-full left-0 w-full bg-white shadow-lg lg:hidden flex flex-col px-6 py-4 gap-4">
+      <a href="#" class="py-2 text-gray-700 hover:text-blue-600">Payments</a>
+      <a href="#" class="py-2 text-gray-700 hover:text-blue-600">Banking+</a>
+      <a href="#!" id="mobileEwalletLink" class="py-2 text-gray-700 hover:text-blue-600">E-wallet</a>
+      <a href="#" class="py-2 text-gray-700 hover:text-blue-600">Support</a>
+      <a href="login.html" class="py-2 text-gray-700 hover:text-blue-600">Log In</a>
+      <a href="signup.html" class="py-2 text-white bg-blue-600 text-center rounded hover:bg-blue-700">Sign Up</a>
     </div>
   </nav>
 
   <!-- Hero Section -->
-  <section class="relative h-[85vh] bg-[#03334D] text-white py-10 flex items-center justify-center text-white px-10">
+  <section class="relative h-[85vh] bg-[#03334D] text-white py-10 flex items-center justify-center px-10">
     <div class="max-w-2xl text-center">
-      <h1 class="text-5xl font-bold mb-4">
-        One Tap, Anywhere <br> Experience the Future of Payments
-      </h1>
+      <h1 class="text-5xl font-bold mb-4">One Tap, Anywhere <br> Experience the Future of Payments</h1>
       <p class="text-lg mb-6 text-gray-200">TapNpay – Effortless Payments at Your Fingertip!</p>
       <div class="flex justify-center gap-4">
-        <button class="signup-btn open-modal-btn bg-white text-blue-600 font-semibold px-6 py-3 rounded hover:bg-gray-100 transition">
+        <a href="signup.html" class="bg-white text-blue-600 font-semibold px-6 py-3 rounded hover:bg-gray-100 transition">
           Sign Up Now <i class="fa-solid fa-arrow-right text-sm pl-1"></i>
-        </button>
+        </a>
         <a href="#" class="text-white font-bold underline hover:text-gray-200">Know More</a>
       </div>
     </div>
-  
   </section>
-   <!--search box-->
-       <!--search box-->
-<div class="relative h-[50px] w-full md:w-11/12 mx-auto mt-6 px-4 bg-white rounded-lg flex items-center justify-between overflow-hidden cursor-pointer group shadow hover:shadow-xl">
-    <div class="absolute -left-1 w-2 h-5 bg-blue-600 rounded-xl"></div>
-    <div class="flex items-center gap-2">
-        <i class="fa-solid fa-magnifying-glass"></i>
-        <div class="text-sm flex items-center">
-            I'm here to
-            <div class="ml-2 text-gray-500 overflow-hidden h-5 text-sm flex flex-col justify-center">
-                <div class="h-5 animate-text-change">
-                    <span class="block h-5">Accept Payments</span>
-                    <span class="block h-5">Make Payouts</span>
-                    <span class="block h-5">Automate Payrolls</span>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="flex items-center gap-2 text-gray-400 text-sm">
-        <p class="group-hover:text-black hidden md:block">Get Started with TapN Pay – Your Wallet, Reimagined</p>
-        <i class="fa-solid fa-arrow-right bg-gray-200 px-2 py-1.5 rounded-md transition-all duration-100 group-hover:bg-blue-700 group-hover:text-white"></i>
-    </div>
-</div>
 
-
-  <!-- Accept Payments Section -->
+  <!-- Services Section -->
   <section class="py-20 px-6 md:px-10">
     <h2 class="text-4xl md:text-5xl font-semibold text-center mb-12">
       Join the Cashless Revolution <br> <span class="text-green-600">Tap & Pay</span>
     </h2>
-
     <div class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-      <!-- Example Card -->
-      <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-2xl transition transform hover:-translate-y-2">
+      
+      <!-- Shops -->
+      <a href="shops.html" class="block bg-white rounded-xl shadow-lg p-6 hover:shadow-2xl transition transform hover:-translate-y-2">
         <div class="flex items-center gap-3 mb-4">
           <i class="fa-solid fa-shop text-blue-600 text-2xl"></i>
           <h4 class="text-lg font-semibold">Shops</h4>
         </div>
         <p class="text-gray-500 mb-4">Accept payments easily from your retail store or local shop.</p>
         <span class="text-xs bg-blue-100 text-blue-700 px-2 py-0.5 rounded-full">NFC Enabled</span>
-      </div>
+      </a>
 
-      <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-2xl transition transform hover:-translate-y-2">
+      <!-- Mall -->
+      <a href="mall.html" class="block bg-white rounded-xl shadow-lg p-6 hover:shadow-2xl transition transform hover:-translate-y-2">
         <div class="flex items-center gap-3 mb-4">
           <i class="fa-solid fa-building text-green-600 text-2xl"></i>
           <h4 class="text-lg font-semibold">Mall</h4>
         </div>
         <p class="text-gray-500 mb-4">Provide a smooth payment experience at malls and large stores.</p>
         <span class="text-xs bg-green-100 text-green-700 px-2 py-0.5 rounded-full">Contactless</span>
-      </div>
+      </a>
 
-      <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-2xl transition transform hover:-translate-y-2">
+      <!-- Dmart -->
+      <a href="dmart.html" class="block bg-white rounded-xl shadow-lg p-6 hover:shadow-2xl transition transform hover:-translate-y-2">
         <div class="flex items-center gap-3 mb-4">
           <i class="fa-solid fa-cart-shopping text-red-600 text-2xl"></i>
           <h4 class="text-lg font-semibold">Dmart</h4>
         </div>
         <p class="text-gray-500 mb-4">Accept quick payments at Dmart outlets effortlessly.</p>
         <span class="text-xs bg-red-100 text-red-700 px-2 py-0.5 rounded-full">Fast Pay</span>
-      </div>
+      </a>
 
-      <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-2xl transition transform hover:-translate-y-2">
+      <!-- Rickshaw -->
+      <a href="rickshaw.html" class="block bg-white rounded-xl shadow-lg p-6 hover:shadow-2xl transition transform hover:-translate-y-2">
         <div class="flex items-center gap-3 mb-4">
           <i class="fa-solid fa-truck text-yellow-600 text-2xl"></i>
           <h4 class="text-lg font-semibold">Rickshaw</h4>
         </div>
         <p class="text-gray-500 mb-4">Enable hassle-free payments for auto-rickshaw rides.</p>
         <span class="text-xs bg-yellow-100 text-yellow-700 px-2 py-0.5 rounded-full">Tap & Go</span>
-      </div>
+      </a>
+
     </div>
   </section>
 
-  <!-- Modal -->
-  <div id="modal" class="fixed inset-0 bg-black bg-opacity-50 hidden justify-center items-center z-50">
-    <div class="bg-white rounded-lg w-96 p-6 relative">
-      <h2 class="text-2xl font-semibold mb-4">Sign Up / Log In</h2>
-      <p class="text-gray-500 mb-4">This is a demo modal. Replace with your signup/login form.</p>
-      <button id="closeModal" class="absolute top-2 right-2 text-gray-500 hover:text-gray-700 text-lg">&times;</button>
-      <button class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded mt-2 w-full">Continue</button>
-    </div>
-  </div>
+  <!-- E-wallet Section -->
+  <section id="ewallet" class="hidden py-20 px-6 md:px-10 bg-gray-100">
+    <h2 class="text-4xl font-semibold text-center mb-12 text-gray-800">Your E-wallet</h2>
+    <div class="max-w-6xl mx-auto grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
 
-<footer class="bg-[#03334D] text-white py-10">
-    <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8">
-
-      <!-- Logo and About -->
-      <div>
-        <h2 class="text-2xl font-bold mb-3">TapNpay</h2>
-        <p class="text-white-900">Seamless NFC card payments and app solutions for shops, malls, and transport. Secure, fast, and reliable.</p>
+      <!-- Add Money -->
+      <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-2xl transform hover:-translate-y-2 transition duration-300 flex flex-col items-center text-center">
+        <i class="fa-solid fa-wallet text-blue-600 text-4xl mb-4"></i>
+        <h3 class="text-xl font-semibold mb-2">Add Money</h3>
+        <p class="text-gray-600 mb-4">Top up your wallet quickly and securely.</p>
+        <button class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition">Add Funds</button>
       </div>
 
-      <!-- Quick Links -->
+      <!-- Withdraw -->
+      <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-2xl transform hover:-translate-y-2 transition duration-300 flex flex-col items-center text-center">
+        <i class="fa-solid fa-arrow-up-from-bracket text-red-600 text-4xl mb-4"></i>
+        <h3 class="text-xl font-semibold mb-2">Withdraw</h3>
+        <p class="text-gray-600 mb-4">Transfer money to your bank account instantly.</p>
+        <button class="bg-red-600 text-white px-6 py-2 rounded hover:bg-red-700 transition">Withdraw</button>
+      </div>
+
+      <!-- Coins -->
+      <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-2xl transform hover:-translate-y-2 transition duration-300 flex flex-col items-center text-center">
+        <i class="fa-solid fa-coins text-yellow-600 text-4xl mb-4"></i>
+        <h3 class="text-xl font-semibold mb-2">Coins</h3>
+        <p class="text-gray-600 mb-4">Track your rewards and loyalty points in one place.</p>
+        <button class="bg-yellow-600 text-white px-6 py-2 rounded hover:bg-yellow-700 transition">View Coins</button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-[#03334D] text-white py-10 px-6 md:px-10 mt-20">
+    <div class="max-w-6xl mx-auto grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
       <div>
-        <h3 class="text-xl font-semibold mb-3">Quick Links</h3>
-        <ul class="space-y-2 text-gray-400">
-          <li><a href="#" class="hover:text-white">Home</a></li>
-          <li><a href="#" class="hover:text-white">About Us</a></li>
-          <li><a href="#" class="hover:text-white">Services</a></li>
-          <li><a href="#" class="hover:text-white">Contact</a></li>
+        <h4 class="font-semibold text-lg mb-4">About TapNpay</h4>
+        <p class="text-gray-300 text-sm">TapNpay makes digital payments effortless, enabling NFC and contactless transactions everywhere you go.</p>
+      </div>
+      <div>
+        <h4 class="font-semibold text-lg mb-4">Services</h4>
+        <ul class="text-gray-300 text-sm space-y-2">
+          <li><a href="#" class="hover:text-blue-400">Payments</a></li>
+          <li><a href="#" class="hover:text-blue-400">Banking+</a></li>
+          <li><a href="#" class="hover:text-blue-400">E-wallet</a></li>
+          <li><a href="#" class="hover:text-blue-400">Support</a></li>
         </ul>
       </div>
-
-      <!-- Social Media -->
       <div>
-        <h3 class="text-xl font-semibold mb-3">Follow Us</h3>
-        <div class="flex gap-4">
-          <a href="#" class="transition-transform duration-300 hover:scale-150 hover:text-blue-500">
-            <i class="fab fa-facebook-f text-2xl"></i>
-          </a>
-          <a href="#" class="transition-transform duration-300 hover:scale-150 hover:text-black">
-            <i class="fab fa-x-twitter text-2xl"></i>
-          </a>
-          <a href="#" class="transition-transform duration-300 hover:scale-150 hover:text-pink-500">
-            <i class="fab fa-instagram text-2xl"></i>
-          </a>
-          <a href="#" class="transition-transform duration-300 hover:scale-150 hover:text-blue-400">
-            <i class="fab fa-linkedin-in text-2xl"></i>
-          </a>
+        <h4 class="font-semibold text-lg mb-4">Contact</h4>
+        <p class="text-gray-300 text-sm">Email: avinash116@gmail.com</p>
+        <p class="text-gray-300 text-sm">Phone: +123 456 7890</p>
+      </div>
+      <div>
+        <h4 class="font-semibold text-lg mb-4">Follow Us</h4>
+        <div class="flex gap-4 text-white text-xl">
+         <a href="https://linkedin.com/in/avinashzz" target="_blank" aria-label="LinkedIn" class="hover:scale-150 hover:text-blue-400 transition"><i class="fab fa-linkedin-in text-2xl"></i></a>
+         <a href="https://x.com/avinash11z" target="_blank" aria-label="Twitter" class="hover:scale-150 hover:text-black transition"><i class="fab fa-x-twitter text-2xl"></i></a>
+         <a href="https://instagram.com/darlscs" target="_blank" aria-label="Instagram" class="hover:scale-150 hover:text-pink-500 transition"><i class="fab fa-instagram text-2xl"></i></a>
         </div>
       </div>
     </div>
-
-    <!-- Bottom Bar -->
-    <div class="text-center text-white-900 mt-8 border-t border-gray-700 pt-4">
-      &copy; 2025 TapNpay. All rights reserved.
-    </div>
+    <p class="text-center text-gray-400 text-sm mt-10">© 2025 TapNpay. All rights reserved.</p>
   </footer>
 
-
-
-  <!-- Scripts -->
+  <!-- Script -->
   <script>
-    const modal = document.getElementById('modal');
-    const openButtons = document.querySelectorAll('.open-modal-btn');
-    const closeButton = document.getElementById('closeModal');
-
-    openButtons.forEach(btn => {
-      btn.addEventListener('click', () => {
-        modal.classList.remove('hidden');
-        modal.classList.add('flex');
-      });
+    // Mobile menu toggle
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    mobileMenuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
     });
 
-    closeButton.addEventListener('click', () => {
-      modal.classList.add('hidden');
-      modal.classList.remove('flex');
-    });
+    // Desktop e-wallet scroll
+    const ewalletSection = document.getElementById('ewallet');
+    const ewalletLink = document.getElementById('ewalletLink');
+    const mobileEwalletLink = document.getElementById('mobileEwalletLink');
 
-    window.addEventListener('click', (e) => {
-      if (e.target === modal) {
-        modal.classList.add('hidden');
-        modal.classList.remove('flex');
+    function scrollToEwallet() {
+      const isLoggedIn = true; // replace with real login check
+      if(isLoggedIn){
+        ewalletSection.scrollIntoView({ behavior: 'smooth' });
+        ewalletSection.classList.remove('hidden');
+      } else {
+        window.location.href = "login.html";
       }
+    }
+
+    ewalletLink.addEventListener('click', (e) => {
+      e.preventDefault();
+      scrollToEwallet();
+    });
+
+    mobileEwalletLink.addEventListener('click', (e) => {
+      e.preventDefault();
+      scrollToEwallet();
+      mobileMenu.classList.add('hidden'); // close menu
     });
   </script>
+
 </body>
-
 </html>
-
